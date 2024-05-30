@@ -20,7 +20,7 @@ uint8_t receivedCommand[5];
 bool commandReceive = false;
 bool stopReceive = false;
 */
-size_t heapSize = 1048576;
+//size_t heapSize = 1048576;
 char pos;
 HardwareSerial uSerial(0);
 
@@ -36,7 +36,10 @@ void setup() {
     while (!camera.begin().isOk());
         Serial.println(camera.exception.toString());
     
-
+    log_d("Total heap: %d", ESP.getHeapSize());
+    log_d("Free heap: %d", ESP.getFreeHeap());
+    log_d("Total PSRAM: %d", ESP.getPsramSize());
+    log_d("Free PSRAM: %d", ESP.getFreePsram());
     /*
         while (!wifi.connect(ssid, password).isOk())
             Serial.println(wifi.exception.toString());
@@ -49,6 +52,7 @@ void setup() {
 }
 
 void loop() {
+/*
     uint8_t* yoloHeap = (uint8_t*)heap_caps_malloc(heapSize, MALLOC_CAP_SPIRAM);
     if (yoloHeap == nullptr) {
         Serial.println("Failed to allocate memory from PSRAM!");
@@ -56,7 +60,7 @@ void loop() {
     } else {
         Serial.println("Memory allocated from PSRAM successfully!");
     }
-
+*/
     if (!camera.capture().isOk()) {
             Serial.println(camera.exception.toString());
             return;
@@ -100,6 +104,6 @@ void loop() {
             });
         }
 //    }
-heap_caps_free(yoloHeap); 
+//heap_caps_free(yoloHeap); 
 
 }
