@@ -81,11 +81,11 @@ __attribute__((weak)) void ei_printf_float(float f) {
 }
 
 __attribute__((weak)) void *ei_malloc(size_t size) {
-    return malloc(size);
+    return ps_malloc(size);
 }
 
 __attribute__((weak)) void *ei_calloc(size_t nitems, size_t size) {
-    return calloc(nitems, size);
+    return ps_calloc(nitems, size);
 }
 
 __attribute__((weak)) void ei_free(void *ptr) {
