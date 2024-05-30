@@ -97,7 +97,7 @@ __attribute__((weak)) void *ei_calloc(size_t nitems, size_t size) {
 }
 
 __attribute__((weak)) void ei_free(void *ptr) {
-    free(ptr);
+    heap_caps_free(ptr);
 }
 
 #if defined(__cplusplus) && EI_C_LINKAGE == 1
