@@ -78,22 +78,22 @@ __attribute__((weak)) void ei_printf_float(float f) {
 // due to https://github.com/espressif/esp-nn/issues/7
 __attribute__((weak)) void *ei_malloc(size_t size) {
 #if defined(CONFIG_IDF_TARGET_ESP32S3)
-    return aligned_alloc(16, size);
+    return heap_caps_aligned_alloc(16, size, MALLOC_CAP_SPIRAM);
 #endif
-    return malloc(size);
+    return heap_caps_malloc(size, MALLOC_CAP_SPIRAM);
 }
 
 __attribute__((weak)) void *ei_calloc(size_t nitems, size_t size) {
 #if defined(CONFIG_IDF_TARGET_ESP32S3)
     void *p;
-    p = aligned_alloc(16, nitems * size);
+    p = heap_caps_aligned_alloc(16, nitems * size, MALLOC_CAP_SPIRAM);
     if (p == nullptr)
         return p;
 
     memset(p, '\0', nitems * size);
     return p;
 #endif
-    return calloc(nitems, size);
+    return heap_caps_calloc(nitems, size, MALLOC_CAP_SPIRAM);
 }
 
 __attribute__((weak)) void ei_free(void *ptr) {
