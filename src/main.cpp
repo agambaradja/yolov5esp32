@@ -36,10 +36,7 @@ void setup() {
     while (!camera.begin().isOk());
         Serial.println(camera.exception.toString());
     
-    log_d("Total heap: %d", ESP.getHeapSize());
-    log_d("Free heap: %d", ESP.getFreeHeap());
-    log_d("Total PSRAM: %d", ESP.getPsramSize());
-    log_d("Free PSRAM: %d", ESP.getFreePsram());
+
     /*
         while (!wifi.connect(ssid, password).isOk())
             Serial.println(wifi.exception.toString());
@@ -65,6 +62,10 @@ void loop() {
             Serial.println(camera.exception.toString());
             return;
     }
+    log_d("Total heap: %d", ESP.getHeapSize());
+    log_d("Free heap: %d", ESP.getFreeHeap());
+    log_d("Total PSRAM: %d", ESP.getPsramSize());
+    log_d("Free PSRAM: %d", ESP.getFreePsram());
 /*
     while (!commandReceive) {
         if (uSerial.available() >= 5) {
